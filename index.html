@@ -33,6 +33,23 @@ height:100%;
 z-index:-1;
 }
 
+/* luces disco */
+
+.disco{
+position:fixed;
+width:100%;
+height:100%;
+background:radial-gradient(circle,transparent,rgba(255,0,150,0.2));
+animation:lights 5s infinite alternate;
+pointer-events:none;
+}
+
+@keyframes lights{
+0%{background:radial-gradient(circle,transparent,rgba(255,0,150,0.2));}
+50%{background:radial-gradient(circle,transparent,rgba(0,150,255,0.2));}
+100%{background:radial-gradient(circle,transparent,rgba(0,255,150,0.2));}
+}
+
 /* intro pantalla */
 
 #intro{
@@ -53,7 +70,7 @@ text-align:center;
 #intro h1{
 font-size:60px;
 margin-bottom:30px;
-background:linear-gradient(45deg,#2e3cff,#020107);
+background:linear-gradient(45deg,#e9d5dc,#00e0ff);
 -webkit-background-clip:text;
 color:transparent;
 }
@@ -62,7 +79,7 @@ color:transparent;
 padding:15px 40px;
 border:none;
 border-radius:30px;
-background:#08447c;
+background:#146e8a;
 color:white;
 font-size:20px;
 cursor:pointer;
@@ -83,10 +100,15 @@ text-align:center;
 display:none;
 }
 
+
 .title{
 font-size:60px;
 margin-bottom:20px;
+background:linear-gradient(45deg,#ff2e7a,#00e0ff);
+-webkit-background-clip:text;
+color:transparent;
 }
+
 
 .card{
 background:rgba(255,255,255,0.05);
@@ -102,7 +124,6 @@ transition:.4s;
 transform:translateY(-10px);
 }
 
-/* countdown */
 
 .countdown{
 display:flex;
@@ -120,7 +141,6 @@ font-size:22px;
 min-width:100px;
 }
 
-/* botones */
 
 button{
 padding:15px 35px;
@@ -138,7 +158,6 @@ button:hover{
 transform:scale(1.1);
 }
 
-/* galeria */
 
 .gallery{
 display:grid;
@@ -159,8 +178,6 @@ transition:.3s;
 transform:scale(1.08);
 }
 
-/* confetti */
-
 .confetti{
 position:fixed;
 width:10px;
@@ -174,25 +191,6 @@ to{
 transform:translateY(110vh) rotate(360deg);
 }
 }
-
-/* luces disco */
-
-.disco{
-position:fixed;
-width:100%;
-height:100%;
-background:radial-gradient(circle,transparent,rgba(255,0,150,0.2));
-animation:lights 5s infinite alternate;
-pointer-events:none;
-}
-
-@keyframes lights{
-0%{background:radial-gradient(circle,transparent,rgba(255,0,150,0.2));}
-50%{background:radial-gradient(circle,transparent,rgba(0,150,255,0.2));}
-100%{background:radial-gradient(circle,transparent,rgba(0,255,150,0.2));}
-}
-
-/* RESPONSIVE */
 
 @media (max-width:768px){
 
@@ -248,12 +246,13 @@ grid-template-columns:1fr;
 <div id="particles-js"></div>
 <div class="disco"></div>
 
-<!-- pantalla inicial -->
 
 <div id="intro">
 <h1>🎉 Invitación 🎉</h1>
 <button onclick="abrir()">Abrir invitación</button>
 </div>
+
+
 
 <div class="container">
 
@@ -281,14 +280,14 @@ grid-template-columns:1fr;
 
 <div class="card">
 
-<h2>Playlist 🎧</h2>
+<h2>🎧</h2>
 
-<iframe
-style="border-radius:12px"
-src="https://open.spotify.com/embed/artist/0cEa9u1e3cDLXCZxxiuEmi"
-width="100%"
-height="380"
-frameBorder="0"
+<iframe 
+style="border-radius:15px"
+src="https://open.spotify.com/embed/playlist/1atnK0GXG71jhcZlAgFiXC?utm_source=generator"
+width="100%" 
+height="380" 
+frameBorder="0" 
 allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture">
 </iframe>
 
@@ -301,8 +300,8 @@ allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-pictur
 <div class="gallery">
 <img src="https://images.pexels.com/photos/8274070/pexels-photo-8274070.jpeg">
 <img src="https://images.pexels.com/photos/256502/pexels-photo-256502.jpeg">
-<img src="https://images.pexels.com/photos/8274070/pexels-photo-8274070.jpeg">
-<img src="https://images.pexels.com/photos/256502/pexels-photo-256502.jpeg">
+<img src="fotos/img05.jpg">
+<img src="fotos/img01.jpg">
 </div>
 
 </div>
@@ -326,24 +325,32 @@ loading="lazy">
 <script>
 
 function abrir(){
+
 document.getElementById("intro").style.display="none";
 document.querySelector(".container").style.display="block";
+
 lanzarConfetti();
+
+/* autoplay spotify */
+
+let player=document.getElementById("spotifyPlayer");
+player.src=player.src+"?autoplay=1";
+
 }
 
 /* cuenta regresiva */
 
-const eventDate = new Date("2026-03-25T15:00:00").getTime();
+const eventDate=new Date("2026-03-25T15:00:00").getTime();
 
 setInterval(()=>{
 
-const now = new Date().getTime();
-const diff = eventDate - now;
+const now=new Date().getTime();
+const diff=eventDate-now;
 
-const d = Math.floor(diff/(1000*60*60*24));
-const h = Math.floor((diff%(1000*60*60*24))/(1000*60*60));
-const m = Math.floor((diff%(1000*60*60))/(1000*60));
-const s = Math.floor((diff%(1000*60))/1000);
+const d=Math.floor(diff/(1000*60*60*24));
+const h=Math.floor((diff%(1000*60*60*24))/(1000*60*60));
+const m=Math.floor((diff%(1000*60*60))/(1000*60));
+const s=Math.floor((diff%(1000*60))/1000);
 
 document.getElementById("days").innerText=d;
 document.getElementById("hours").innerText=h;
@@ -355,7 +362,9 @@ document.getElementById("seconds").innerText=s;
 /* whatsapp */
 
 function confirmar(){
+
 window.open("https://wa.me/51948202563?text=Confirmo%20mi%20asistencia%20al%20cumpleaños%20de%20Jorvin%20🎉");
+
 }
 
 /* confetti */
@@ -386,11 +395,13 @@ setTimeout(()=>confetti.remove(),5000);
 /* partículas */
 
 particlesJS("particles-js",{
+
 particles:{
 number:{value:80},
 size:{value:3},
 move:{speed:2}
 }
+
 })
 
 </script>
